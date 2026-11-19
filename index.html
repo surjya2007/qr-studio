@@ -1,1 +1,63 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Studio - QR Code Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h2>▦ QR Studio</h2>
+        <p>Create. Customize. Download.</p>
+    </header>
+
+    <main class="container">
+
+        <section class="generator">
+            <h1>Create Your QR Code</h1>
+            <p class="subtitle">Generate QR codes easily and instantly.</p>
+
+            <label for="qrType">Choose QR Type</label>
+            <select id="qrType">
+                <option value="url">Website URL</option>
+                <option value="text">Plain Text</option>
+                <option value="wifi">Wi-Fi</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone Number</option>
+            </select>
+
+            <div id="inputArea">
+                <label for="qrInput">Enter your URL</label>
+                <input type="text" id="qrInput"
+                    placeholder="https://example.com">
+            </div>
+
+            <button id="generateBtn">Generate QR Code</button>
+        </section>
+
+        <section class="result">
+            <h2>Your QR Code</h2>
+
+            <div id="qrcode">
+                <p>Your QR code will appear here.</p>
+            </div>
+
+            <button id="downloadBtn">Download QR Code</button>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Made with ❤️ by Surjya Dhal</p>
+        <p>© 2026 QR Studio. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
+
