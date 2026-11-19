@@ -30,10 +30,22 @@
             </select>
 
             <div id="inputArea">
-                <label for="qrInput">Enter your URL</label>
-                <input type="text" id="qrInput"
-                    placeholder="https://example.com">
-            </div>
+    <label for="qrInput">Enter your URL</label>
+    <input type="text" id="qrInput"
+        placeholder="https://example.com">
+</div>
+
+<div class="color-options">
+    <div>
+        <label for="qrColor">QR Color</label>
+        <input type="color" id="qrColor" value="#000000">
+    </div>
+
+    <div>
+        <label for="bgColor">Background Color</label>
+        <input type="color" id="bgColor" value="#ffffff">
+    </div>
+</div>
 
             <button id="generateBtn">Generate QR Code</button>
         </section>
