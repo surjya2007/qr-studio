@@ -1,75 +1,203 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Studio - QR Code Generator</title>
+
+    <meta name="description" content="QR Studio - Create beautiful custom neon gradient QR codes for free.">
+
+    <title>QR Studio | Neon QR Generator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <header>
-        <h2>▦ QR Studio</h2>
+    <header class="header">
+        <a href="#" class="logo">
+            <span class="logo-icon">▦</span>
+            QR <span>Studio</span>
+        </a>
+
         <p>Create. Customize. Download.</p>
     </header>
 
     <main class="container">
 
-        <section class="generator">
-            <h1>Create Your QR Code</h1>
-            <p class="subtitle">Generate QR codes easily and instantly.</p>
+        <div class="intro">
+            <span class="eyebrow">FREE ONLINE QR GENERATOR</span>
 
-            <label for="qrType">Choose QR Type</label>
-            <select id="qrType">
-                <option value="url">Website URL</option>
-                <option value="text">Plain Text</option>
-                <option value="wifi">Wi-Fi</option>
-                <option value="email">Email</option>
-                <option value="phone">Phone Number</option>
-            </select>
+            <h1>Create Your Own
+                <span class="gradient-text">Neon QR Code</span>
+            </h1>
 
-            <div id="inputArea">
-    <label for="qrInput">Enter your URL</label>
-    <input type="text" id="qrInput"
-        placeholder="https://example.com">
-</div>
+            <p>Turn links, text and information into beautiful custom QR codes.</p>
+        </div>
 
-<div class="color-options">
-    <div>
-        <label for="qrColor">QR Color</label>
-        <input type="color" id="qrColor" value="#000000">
-    </div>
+        <div class="workspace">
 
-    <div>
-        <label for="bgColor">Background Color</label>
-        <input type="color" id="bgColor" value="#ffffff">
-    </div>
-</div>
+            <!-- Generator -->
 
-            <button id="generateBtn">Generate QR Code</button>
-        </section>
+            <section class="card generator">
 
-        <section class="result">
-            <h2>Your QR Code</h2>
+                <div class="card-heading">
+                    <span class="heading-icon">✦</span>
 
-            <div id="qrcode">
-                <p>Your QR code will appear here.</p>
+                    <div>
+                        <h2>QR Generator</h2>
+                        <p>Enter your information</p>
+                    </div>
+                </div>
+
+                <label for="qrType">QR Code Type</label>
+
+                <select id="qrType">
+                    <option value="url">Website URL</option>
+                    <option value="text">Plain Text</option>
+                    <option value="wifi">Wi-Fi Network</option>
+                    <option value="email">Email Address</option>
+                    <option value="phone">Phone Number</option>
+                </select>
+
+                <div id="inputArea"></div>
+
+                <div class="customization">
+
+                    <div class="section-heading">
+                        <h3>Neon Customization</h3>
+                        <span class="pro-label">DESIGN</span>
+                    </div>
+
+                    <label for="neonPreset">Choose Neon Effect</label>
+
+                    <select id="neonPreset">
+                        <option value="blue">Electric Blue + Cyan</option>
+                        <option value="purple">Purple + Pink</option>
+                        <option value="green">Cyber Green + Blue</option>
+                        <option value="sunset">Sunset Orange + Pink</option>
+                        <option value="rainbow">Rainbow Neon</option>
+                        <option value="custom">Custom Gradient</option>
+                    </select>
+
+                    <div class="color-options">
+
+                        <div>
+                            <label for="qrColor">Start Color</label>
+                            <input type="color" id="qrColor" value="#0878ff">
+                        </div>
+
+                        <div>
+                            <label for="qrColorEnd">End Color</label>
+                            <input type="color" id="qrColorEnd" value="#22ffff">
+                        </div>
+
+                    </div>
+
+                    <label for="bgColor">Background Color</label>
+                    <input type="color" id="bgColor" value="#080b18">
+
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="glowEffect" checked>
+                        Enable Neon Glow
+                    </label>
+
+                </div>
+
+                <button id="generateBtn" class="generate-btn">
+                    ✦ Generate QR Code
+                </button>
+
+                <p class="privacy-note">
+                    🔒 Your QR data is processed in your browser.
+                </p>
+
+            </section>
+
+            <!-- Preview -->
+
+            <section class="card result">
+
+                <div class="card-heading">
+                    <span class="heading-icon">◈</span>
+
+                    <div>
+                        <h2>QR Preview</h2>
+                        <p>Your customized QR code</p>
+                    </div>
+                </div>
+
+                <div class="qr-stage">
+                    <div id="qrcode">
+                        <div class="empty-state">
+                            <span>▦</span>
+                            <p>Your QR code will appear here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="statusMessage" class="status-message">
+                    Waiting for QR generation...
+                </div>
+
+                <button id="downloadBtn" class="download-btn">
+                    ↓ Download PNG
+                </button>
+
+                <p class="preview-note">
+                    Scan your QR code using your smartphone camera.
+                </p>
+
+            </section>
+
+        </div>
+
+        <!-- Features -->
+
+        <section class="features">
+
+            <div class="feature">
+                <span>🌈</span>
+                <h3>Neon Gradients</h3>
+                <p>Beautiful mixed color effects.</p>
             </div>
 
-            <button id="downloadBtn">Download QR Code</button>
+            <div class="feature">
+                <span>⚡</span>
+                <h3>Instant Generation</h3>
+                <p>Create QR codes quickly.</p>
+            </div>
+
+            <div class="feature">
+                <span>🔒</span>
+                <h3>Browser Based</h3>
+                <p>Your input stays in your browser.</p>
+            </div>
+
         </section>
 
     </main>
 
     <footer>
-        <p>Made with ❤️ by Surjya Dhal</p>
-        <p>© 2026 QR Studio. All rights reserved.</p>
+        <h3>QR <span>Studio</span></h3>
+
+        <p>Create. Customize. Download.</p>
+
+        <p class="copyright">
+            Made with ❤️ by Surjya Dhal · © 2026 QR Studio
+        </p>
     </footer>
 
+    <!-- QR Code Library -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
     <script src="script.js"></script>
 
 </body>
 </html>
-
