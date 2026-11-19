@@ -113,8 +113,8 @@ function generateQR() {
             text: data,
             width: 200,
             height: 200,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
+            colorDark: document.getElementById("qrColor").value,
+            colorLight: document.getElementById("bgColor").value,
             correctLevel: QRCode.CorrectLevel.H
         });
     } catch (error) {
