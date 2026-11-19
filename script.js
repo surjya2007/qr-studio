@@ -1,6 +1,6 @@
 
 // ======================================
-// QR STUDIO - NEON QR GENERATOR
+// QR STUDIO - NEON ROUNDED QR GENERATOR
 // ======================================
 
 const qrType = document.getElementById("qrType");
@@ -21,20 +21,15 @@ const statusMessage = document.getElementById("statusMessage");
 
 let generatedCanvas = null;
 
-
 // ======================================
 // NEON COLOR PRESETS
 // ======================================
 
 const neonPresets = {
     blue: ["#0878ff", "#22ffff"],
-
     purple: ["#8b2cff", "#ff38d1"],
-
     green: ["#00ff88", "#00aaff"],
-
     sunset: ["#ff5a00", "#ff35a8"],
-
     rainbow: [
         "#ff1744",
         "#ff9100",
@@ -45,24 +40,18 @@ const neonPresets = {
     ]
 };
 
-
 // ======================================
 // UPDATE PRESET COLORS
 // ======================================
 
 neonPreset.addEventListener("change", function () {
-
     const colors = neonPresets[this.value];
 
     if (colors) {
         qrColor.value = colors[0];
         qrColorEnd.value = colors[colors.length - 1];
     }
-
 });
-
-
-// Custom colors automatically switch to custom mode
 
 qrColor.addEventListener("input", function () {
     neonPreset.value = "custom";
@@ -72,16 +61,13 @@ qrColorEnd.addEventListener("input", function () {
     neonPreset.value = "custom";
 });
 
-
 // ======================================
 // DYNAMIC INPUT FIELDS
 // ======================================
 
 function createInput(label, placeholder, type = "text") {
-
     return `
         <label>${label}</label>
-
         <input
             type="${type}"
             placeholder="${placeholder}"
@@ -90,119 +76,74 @@ function createInput(label, placeholder, type = "text") {
     `;
 }
 
-
 function updateInputs() {
-
     const type = qrType.value;
 
     if (type === "url") {
-
         inputArea.innerHTML = createInput(
             "Website URL",
             "https://example.com",
             "url"
         );
-
     }
 
     else if (type === "text") {
-
         inputArea.innerHTML = createInput(
             "Enter Your Text",
             "Write something..."
         );
-
     }
 
     else if (type === "wifi") {
-
         inputArea.innerHTML =
-
-            createInput(
-                "Wi-Fi Network Name",
-                "My WiFi"
-            ) +
-
-            createInput(
-                "Wi-Fi Password",
-                "Enter password",
-                "password"
-            ) +
-
+            createInput("Wi-Fi Network Name", "My WiFi") +
+            createInput("Wi-Fi Password", "Enter password", "password") +
             `
                 <label>Security Type</label>
-
                 <select id="wifiSecurity">
                     <option value="WPA">WPA/WPA2</option>
                     <option value="WEP">WEP</option>
                     <option value="nopass">No Password</option>
                 </select>
             `;
-
     }
 
     else if (type === "email") {
-
         inputArea.innerHTML =
-
-            createInput(
-                "Email Address",
-                "example@gmail.com",
-                "email"
-            ) +
-
-            createInput(
-                "Email Subject",
-                "Enter subject"
-            ) +
-
-            createInput(
-                "Email Message",
-                "Enter message"
-            );
-
+            createInput("Email Address", "example@gmail.com", "email") +
+            createInput("Email Subject", "Enter subject") +
+            createInput("Email Message", "Enter message");
     }
 
     else if (type === "phone") {
-
         inputArea.innerHTML = createInput(
             "Phone Number",
             "+911234567890",
             "tel"
         );
-
     }
-
 }
-
 
 // ======================================
 // ESCAPE WIFI DATA
 // ======================================
 
 function escapeWifi(value) {
-
     return value.replace(/([\\;,:"])/g, "\\$1");
-
 }
-
 
 // ======================================
 // GET QR DATA
 // ======================================
 
 function getQRData() {
-
     const fields = inputArea.querySelectorAll("input");
 
     if (qrType.value === "wifi") {
-
         const ssid = fields[0].value.trim();
         const password = fields[1].value;
 
-        const security = document.getElementById(
-            "wifiSecurity"
-        ).value;
+        const security = document.getElementById("wifiSecurity").value;
 
         if (!ssid) {
             alert("Please enter your Wi-Fi name.");
@@ -218,12 +159,9 @@ function getQRData() {
         const escapedPassword = escapeWifi(password);
 
         return `WIFI:T:${security};S:${escapedSSID};P:${security === "nopass" ? "" : escapedPassword};;`;
-
     }
 
-
     if (qrType.value === "email") {
-
         const email = fields[0].value.trim();
         const subject = fields[1].value;
         const message = fields[2].value;
@@ -238,12 +176,9 @@ function getQRData() {
             `?subject=${encodeURIComponent(subject)}` +
             `&body=${encodeURIComponent(message)}`
         );
-
     }
 
-
     if (qrType.value === "phone") {
-
         const phone = fields[0].value.trim();
 
         if (!phone) {
@@ -252,9 +187,7 @@ function getQRData() {
         }
 
         return `tel:${phone}`;
-
     }
-
 
     const value = fields[0].value.trim();
 
@@ -263,11 +196,8 @@ function getQRData() {
         return null;
     }
 
-
     if (qrType.value === "url") {
-
         try {
-
             const parsedURL = new URL(value);
 
             if (
@@ -276,43 +206,32 @@ function getQRData() {
             ) {
                 throw new Error("Invalid protocol");
             }
-
         } catch (error) {
-
             alert("Please enter a valid website URL beginning with https:// or http://");
-
             return null;
-
         }
-
     }
 
     return value;
-
 }
-
 
 // ======================================
 // HEX TO RGB
 // ======================================
 
 function hexToRgb(hex) {
-
     return {
         r: parseInt(hex.slice(1, 3), 16),
         g: parseInt(hex.slice(3, 5), 16),
         b: parseInt(hex.slice(5, 7), 16)
     };
-
 }
 
-
 // ======================================
-// COLOR GRADIENT CALCULATION
+// COLOR GRADIENT
 // ======================================
 
 function interpolateColor(colors, position) {
-
     const scaled = position * (colors.length - 1);
 
     const index = Math.min(
@@ -326,80 +245,76 @@ function interpolateColor(colors, position) {
     const second = hexToRgb(colors[index + 1]);
 
     return {
-        r: Math.round(
-            first.r + (second.r - first.r) * localPosition
-        ),
-
-        g: Math.round(
-            first.g + (second.g - first.g) * localPosition
-        ),
-
-        b: Math.round(
-            first.b + (second.b - first.b) * localPosition
-        )
+        r: Math.round(first.r + (second.r - first.r) * localPosition),
+        g: Math.round(first.g + (second.g - first.g) * localPosition),
+        b: Math.round(first.b + (second.b - first.b) * localPosition)
     };
-
 }
 
+// ======================================
+// CHECK QR FINDER PATTERNS
+// Keep the three corner markers square.
+// ======================================
+
+function isFinderPattern(row, col, count) {
+    const topLeft = row < 7 && col < 7;
+
+    const topRight = row < 7 && col >= count - 7;
+
+    const bottomLeft = row >= count - 7 && col < 7;
+
+    return topLeft || topRight || bottomLeft;
+}
 
 // ======================================
-// CREATE NEON QR CANVAS
+// CREATE ROUNDED NEON QR
 // ======================================
 
-function createNeonQR(sourceCanvas) {
+function createNeonQR(qrInstance) {
+    const qrMatrix = qrInstance._oQRCode;
 
-    const width = sourceCanvas.width;
-    const height = sourceCanvas.height;
+    if (!qrMatrix) {
+        throw new Error("QR matrix could not be accessed.");
+    }
 
-    const sourceContext = sourceCanvas.getContext("2d");
+    const count = qrMatrix.getModuleCount();
 
-    const sourceData = sourceContext.getImageData(
-        0,
-        0,
-        width,
-        height
-    );
+    const finalCanvas = document.createElement("canvas");
 
-    const colors = neonPresets[neonPreset.value] || [
-        qrColor.value,
-        qrColorEnd.value
-    ];
+    finalCanvas.width = 400;
+    finalCanvas.height = 400;
+
+    const ctx = finalCanvas.getContext("2d");
+
+    // Four-module quiet zone around the QR.
+    const moduleSize = 400 / (count + 8);
+    const offset = moduleSize * 4;
+
+    const colors = neonPresets[neonPreset.value]
+        ? [...neonPresets[neonPreset.value]]
+        : [qrColor.value, qrColorEnd.value];
 
     if (neonPreset.value === "custom") {
         colors[0] = qrColor.value;
         colors[1] = qrColorEnd.value;
     }
 
-    const outputCanvas = document.createElement("canvas");
+    // Background
+    ctx.fillStyle = bgColor.value;
+    ctx.fillRect(0, 0, 400, 400);
 
-    outputCanvas.width = width;
-    outputCanvas.height = height;
+    // Draw QR modules
+    function drawModules() {
+        for (let row = 0; row < count; row++) {
+            for (let col = 0; col < count; col++) {
 
-    const ctx = outputCanvas.getContext("2d");
-
-    const output = ctx.createImageData(width, height);
-
-    // Process each QR pixel
-
-    for (let y = 0; y < height; y++) {
-
-        for (let x = 0; x < width; x++) {
-
-            const i = (y * width + x) * 4;
-
-            const r = sourceData.data[i];
-            const g = sourceData.data[i + 1];
-            const b = sourceData.data[i + 2];
-
-            const brightness = (r + g + b) / 3;
-
-            // Dark pixels represent QR modules
-
-            if (brightness < 128) {
+                if (!qrMatrix.isDark(row, col)) {
+                    continue;
+                }
 
                 const position = (
-                    (x / width) * 0.7 +
-                    (y / height) * 0.3
+                    (col / Math.max(1, count - 1)) * 0.7 +
+                    (row / Math.max(1, count - 1)) * 0.3
                 );
 
                 const color = interpolateColor(
@@ -407,76 +322,65 @@ function createNeonQR(sourceCanvas) {
                     position
                 );
 
-                output.data[i] = color.r;
-                output.data[i + 1] = color.g;
-                output.data[i + 2] = color.b;
-                output.data[i + 3] = 255;
+                ctx.fillStyle = `rgb(${color.r}, ${color.g}, ${color.b})`;
 
+                const x = offset + col * moduleSize;
+                const y = offset + row * moduleSize;
+
+                if (isFinderPattern(row, col, count)) {
+
+                    // Preserve square finder patterns.
+                    ctx.fillRect(
+                        x,
+                        y,
+                        moduleSize + 0.2,
+                        moduleSize + 0.2
+                    );
+
+                } else {
+
+                    // Rounded QR dots.
+                    const radius = moduleSize * 0.42;
+
+                    ctx.beginPath();
+
+                    ctx.arc(
+                        x + moduleSize / 2,
+                        y + moduleSize / 2,
+                        radius,
+                        0,
+                        Math.PI * 2
+                    );
+
+                    ctx.fill();
+                }
             }
-
         }
-
     }
 
-    ctx.putImageData(output, 0, 0);
-
-
-    // Create final background
-
-    const finalCanvas = document.createElement("canvas");
-
-    finalCanvas.width = width;
-    finalCanvas.height = height;
-
-    const finalContext = finalCanvas.getContext("2d");
-
-    finalContext.fillStyle = bgColor.value;
-
-    finalContext.fillRect(
-        0,
-        0,
-        width,
-        height
-    );
-
-
-    // Add soft neon glow
-
+    // Optional neon glow
     if (glowEffect.checked) {
+        ctx.save();
 
-        finalContext.shadowColor = qrColor.value;
-        finalContext.shadowBlur = 12;
+        ctx.shadowColor = qrColor.value;
+        ctx.shadowBlur = 12;
 
-        finalContext.drawImage(
-            outputCanvas,
-            0,
-            0
-        );
+        drawModules();
 
+        ctx.restore();
     }
 
-
-    // Draw sharp QR modules over the glow
-
-    finalContext.shadowBlur = 0;
-
-    finalContext.drawImage(
-        outputCanvas,
-        0,
-        0
-    );
+    // Draw sharp modules on top of glow.
+    drawModules();
 
     return finalCanvas;
-
 }
-
 
 // ======================================
 // GENERATE QR CODE
 // ======================================
 
 function generateQR() {
-
     const data = getQRData();
 
     if (!data) {
@@ -484,62 +388,38 @@ function generateQR() {
     }
 
     if (typeof QRCode === "undefined") {
-
         alert("QR library could not load. Check your internet connection.");
-
         return;
-
     }
 
     generatedCanvas = null;
-
     qrContainer.innerHTML = "";
 
-    statusMessage.textContent = "Generating your neon QR code...";
+    statusMessage.textContent = "Generating your rounded neon QR code...";
 
     generateBtn.disabled = true;
-
     generateBtn.textContent = "Generating...";
 
-
     try {
-
-        new QRCode(qrContainer, {
-
+        const qrInstance = new QRCode(qrContainer, {
             text: data,
-
             width: 400,
-
             height: 400,
-
             colorDark: "#000000",
-
             colorLight: "#ffffff",
-
             correctLevel: QRCode.CorrectLevel.H
-
         });
 
-
-        // Wait for QRCode.js to render the canvas
-
+        // Wait for QRCode.js to render.
         setTimeout(function () {
-
             try {
-
-                const sourceCanvas = qrContainer.querySelector(
-                    "canvas"
-                );
+                const sourceCanvas = qrContainer.querySelector("canvas");
 
                 if (!sourceCanvas) {
-
                     throw new Error("QR canvas not found");
-
                 }
 
-                generatedCanvas = createNeonQR(
-                    sourceCanvas
-                );
+                generatedCanvas = createNeonQR(qrInstance);
 
                 qrContainer.innerHTML = "";
 
@@ -551,92 +431,65 @@ function generateQR() {
                 qrContainer.appendChild(generatedCanvas);
 
                 statusMessage.textContent =
-                    "✓ Your neon QR code is ready!";
+                    "✓ Your rounded neon QR code is ready!";
 
             } catch (error) {
-
                 console.error(error);
+
+                generatedCanvas = null;
 
                 statusMessage.textContent =
                     "Could not create QR preview. Please try again.";
-
             }
 
             generateBtn.disabled = false;
-
             generateBtn.textContent = "✦ Generate QR Code";
 
         }, 150);
 
     } catch (error) {
-
         console.error(error);
 
         alert("Something went wrong while generating the QR code.");
 
         generateBtn.disabled = false;
-
         generateBtn.textContent = "✦ Generate QR Code";
-
     }
-
 }
-
 
 // ======================================
 // DOWNLOAD QR CODE
 // ======================================
 
 function downloadQR() {
-
     if (!generatedCanvas) {
-
         alert("Please generate a QR code first!");
-
         return;
-
     }
 
     try {
-
         const link = document.createElement("a");
 
-        link.download = "QR-Studio-Neon.png";
+        link.download = "QR-Studio-Rounded-Neon.png";
 
-        link.href = generatedCanvas.toDataURL(
-            "image/png"
-        );
+        link.href = generatedCanvas.toDataURL("image/png");
 
         link.click();
 
     } catch (error) {
-
         alert("Unable to download the QR code.");
-
     }
-
 }
-
 
 // ======================================
 // EVENT LISTENERS
 // ======================================
 
-qrType.addEventListener(
-    "change",
-    updateInputs
-);
+qrType.addEventListener("change", updateInputs);
 
-generateBtn.addEventListener(
-    "click",
-    generateQR
-);
+generateBtn.addEventListener("click", generateQR);
 
-downloadBtn.addEventListener(
-    "click",
-    downloadQR
-);
-
+downloadBtn.addEventListener("click", downloadQR);
 
 // ======================================
 // INITIALIZE
