@@ -1,1 +1,163 @@
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1020;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 30px 15px;
+    background: #111a30;
+    border-bottom: 1px solid #263653;
+}
+
+header h2 {
+    color: #60a5fa;
+    font-size: 30px;
+}
+
+header p {
+    color: #aab8d0;
+    margin-top: 8px;
+}
+
+.container {
+    width: 90%;
+    max-width: 950px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.generator,
+.result {
+    background: #141f36;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #293b5c;
+    width: 430px;
+}
+
+h1 {
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    color: #aab8d0;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin: 18px 0 8px;
+    color: #dce7f8;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #344968;
+    border-radius: 8px;
+    background: #0b1529;
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #60a5fa;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 22px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #3b82f6;
+    transform: translateY(-2px);
+}
+
+.result {
+    text-align: center;
+}
+
+#qrcode {
+    background: white;
+    min-height: 220px;
+    width: 100%;
+    max-width: 260px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+}
+
+#qrcode img {
+    max-width: 100%;
+    height: auto;
+}
+
+#qrcode canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    padding: 25px 15px;
+    color: #8fa2bf;
+    border-top: 1px solid #263653;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 6px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 92%;
+        margin: 25px auto;
+    }
+
+    .generator,
+    .result {
+        width: 100%;
+        padding: 22px;
+    }
+
+    header h2 {
+        font-size: 25px;
+    }
+}
+
